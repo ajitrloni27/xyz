@@ -1,51 +1,177 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#080c14" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Ajit | Aspiring Software Developer & 3rd-Year ISE Student</title>
-    <meta name="title" content="Ajit | Aspiring Software Developer & 3rd-Year ISE Student" />
-    <meta
-      name="description"
-      content="Portfolio of Ajit, a 3rd-year Information Science and Engineering student. Explore my software projects, technical skills, coursework, and contact details."
-    />
-    <meta
-      name="keywords"
-      content="Ajit, Portfolio, Software Developer, Information Science and Engineering, ISE, Web Development, React, Full Stack, Student Developer, JavaScript, Tech"
-    />
-    <meta name="author" content="Ajit" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajit Ramachandra Loni · Founder, MaciF</title>
+  <meta name="description" content="Personal portfolio of Ajit Ramachandra Loni - 3rd year Information Science & Engineering student and Founder of MaciF building apps, hackathon projects, and solutions to real problems." />
+  <meta name="theme-color" content="#0f0e0d" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ajit | Aspiring Software Developer & 3rd-Year ISE Student" />
-    <meta
-      property="og:description"
-      content="Portfolio of Ajit - 3rd-year Information Science & Engineering student. Building clean, fast, and modern web applications."
-    />
-    <meta property="og:site_name" content="Ajit Portfolio" />
+  <!-- Google Fonts: Syne, Space Grotesk, Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Ajit | Aspiring Software Developer" />
-    <meta
-      property="twitter:description"
-      content="Portfolio of Ajit - 3rd-year Information Science & Engineering student. Explore projects, skills, and background."
-    />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-[#07090e] text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- BACKGROUND ANIMATION LAYER -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-glow-orb"></div>
+    <div class="bg-circle bg-circle-1"></div>
+    <div class="bg-circle bg-circle-2"></div>
+    <div class="bg-circle bg-circle-3"></div>
+    <div id="bg-stars" class="bg-stars"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="Ajit Home">
+        <span class="brand-name">Ajit.-</span>
+        <span class="brand-badge">MaciF</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- SECTION 1: HERO -->
+    <section class="hero-section">
+      <div class="container">
+        
+        <!-- Avatar Row -->
+        <div class="hero-avatar-row reveal">
+          <div class="avatar-circle">
+            <span class="avatar-initials">AR</span>
+          </div>
+          <span class="avatar-name">Ajit Ramachandra Loni</span>
+        </div>
+
+        <!-- Huge Heading with blinking underscore -->
+        <h1 class="hero-heading reveal delay-1">
+          Hey, I'm Ajit<span class="blinking-cursor">_</span>
+        </h1>
+
+        <!-- Small mono line under heading -->
+        <p class="hero-subline reveal delay-1">Founder, MaciF</p>
+
+        <!-- Muted Tagline -->
+        <p class="hero-tagline reveal delay-2">
+          3rd year ISE student building apps, hackathon projects, and things that solve real problems.
+        </p>
+
+        <!-- Two Action Buttons -->
+        <div class="hero-actions reveal delay-3">
+          <a href="projects.html" class="btn btn-primary">
+            View Projects ↗
+          </a>
+          <a href="#connect" class="btn btn-outline">
+            Get in Touch ↓
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT ME -->
+    <section class="section-spacing">
+      <div class="container">
+        <h2 class="section-title reveal">About Me</h2>
+        
+        <div class="card about-card reveal delay-1">
+          <ul class="about-list">
+            <li class="about-line">
+              <span class="about-dash">—</span>
+              <span>Third-year Information Science and Engineering student.</span>
+            </li>
+            <li class="about-line">
+              <span class="about-dash">—</span>
+              <span>Founder of MaciF.</span>
+            </li>
+            <li class="about-line">
+              <span class="about-dash">—</span>
+              <span>I love turning real-world problems into working software.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: CONNECT / NETWORK -->
+    <section id="connect" class="section-spacing">
+      <div class="container">
+        <div class="reveal">
+          <span class="mono-label">[02] Network</span>
+          <h2 class="section-title" style="margin-top: 0.2rem;">Connect</h2>
+        </div>
+
+        <div class="network-grid">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-1">
+            <div class="network-info">
+              <span class="network-name">LinkedIn</span>
+              <span class="network-handle">in/ajitrloni</span>
+            </div>
+            <span class="network-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-2">
+            <div class="network-info">
+              <span class="network-name">Github</span>
+              <span class="network-handle">@ajitrloni27</span>
+            </div>
+            <span class="network-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-3">
+            <div class="network-info">
+              <span class="network-name">Instagram</span>
+              <span class="network-handle">@ajit__loni</span>
+            </div>
+            <span class="network-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:ajitrloni27@gmail.com" class="card network-card reveal delay-3">
+            <div class="network-info">
+              <span class="network-name">Email</span>
+              <span class="network-handle">ajitrloni27@gmail.com</span>
+            </div>
+            <span class="network-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copyright">
+        &copy; 2026 Ajit Ramachandra Loni &middot; MaciF
+      </p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+        <li><a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
 </html>

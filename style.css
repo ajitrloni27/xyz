@@ -1,0 +1,842 @@
+/* ===================================================================
+   AJIT RAMACHANDRA LONI - PERSONAL PORTFOLIO
+   Theme: Minimal Dark with Warm Earth/Gold Accent (#c8955a)
+   Fonts: Syne (Headings), Space Grotesk (Body), Space Mono (Labels/Code)
+   =================================================================== */
+
+:root {
+  --bg-color: #0f0e0d;
+  --card-bg: #181716;
+  --card-border: #2a2826;
+  --card-radius: 14px;
+  --text-main: #f5f0e8;
+  --text-muted: #a39e96;
+  --accent: #c8955a;
+  --accent-glow: rgba(200, 149, 90, 0.12);
+  --accent-subtle: rgba(200, 149, 90, 0.06);
+
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --max-width: 1200px;
+  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: rgba(200, 149, 90, 0.35);
+  color: #fff;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* Layout container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* ===================================================================
+   BACKGROUND ANIMATION LAYER
+   - Subtle rotating circles (opacity ~0.06)
+   - Moving soft accent radial glow
+   - ~40 twinkling dots
+   - Disables completely when prefers-reduced-motion is active
+   =================================================================== */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+/* Subtle glowing accent gradient orb */
+.bg-glow-orb {
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 149, 90, 0.08) 0%, rgba(200, 149, 90, 0.02) 45%, transparent 70%);
+  animation: driftGlow 32s ease-in-out infinite alternate;
+  filter: blur(40px);
+}
+
+@keyframes driftGlow {
+  0% {
+    transform: translate(-15%, -10%) scale(0.9);
+  }
+  50% {
+    transform: translate(15%, 15%) scale(1.1);
+  }
+  100% {
+    transform: translate(-5%, 5%) scale(1);
+  }
+}
+
+/* Slowly rotating thin circle outlines */
+.bg-circle {
+  position: absolute;
+  border: 1px solid rgba(245, 240, 232, 0.06);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bg-circle-1 {
+  width: 500px;
+  height: 500px;
+  border-style: solid;
+  border-color: rgba(200, 149, 90, 0.05);
+  animation: rotateCircle 45s linear infinite;
+}
+
+.bg-circle-2 {
+  width: 850px;
+  height: 850px;
+  border-style: dashed;
+  border-color: rgba(245, 240, 232, 0.04);
+  animation: rotateCircleReverse 60s linear infinite;
+}
+
+.bg-circle-3 {
+  width: 1200px;
+  height: 1200px;
+  border-style: solid;
+  border-color: rgba(245, 240, 232, 0.03);
+  animation: rotateCircle 75s linear infinite;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes rotateCircleReverse {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+/* Twinkling dots container */
+.bg-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.star-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #f5f0e8;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: starTwinkle var(--duration, 4s) ease-in-out infinite alternate;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.04;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.4);
+    box-shadow: 0 0 6px rgba(200, 149, 90, 0.6);
+  }
+  100% {
+    opacity: 0.08;
+    transform: scale(0.9);
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow-orb,
+  .bg-circle-1,
+  .bg-circle-2,
+  .bg-circle-3,
+  .star-dot,
+  .blinking-cursor {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===================================================================
+   NAVBAR
+   - Sticky with slightly blurred dark background
+   - 1px bottom border
+   - Logo "Ajit.-" + mono label "MaciF" in accent color
+   - Links "Home" & "Projects" with accent underline for active
+   =================================================================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 14, 13, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--card-border);
+  transition: var(--transition);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.brand-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border: 1px solid rgba(200, 149, 90, 0.25);
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  position: relative;
+  padding: 0.35rem 0;
+  letter-spacing: 0.03em;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+/* Active link underline in accent color */
+.nav-link.active {
+  color: var(--text-main);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+/* ===================================================================
+   FADE-UP SCROLL ANIMATIONS (IntersectionObserver)
+   =================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay helpers */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* ===================================================================
+   CARDS (Universal Style)
+   - Background #181716
+   - 1px border #2a2826
+   - 14px radius
+   - Hover lift + accent border
+   =================================================================== */
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--accent);
+}
+
+/* ===================================================================
+   BUTTONS
+   =================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.75rem 1.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Filled off-white, dark text */
+.btn-primary {
+  background-color: #f5f0e8;
+  color: #0f0e0d;
+  border-color: #f5f0e8;
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(245, 240, 232, 0.15);
+}
+
+/* Outlined */
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-main);
+  border-color: var(--card-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-subtle);
+  transform: translateY(-2px);
+}
+
+/* ===================================================================
+   HOME PAGE: HERO SECTION
+   =================================================================== */
+
+.hero-section {
+  padding-top: 6rem;
+  padding-bottom: 5.5rem;
+}
+
+.hero-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  background: #181716;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 16px rgba(200, 149, 90, 0.2);
+}
+
+.avatar-initials {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.avatar-name {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+/* Blinking accent-colored underscore */
+.blinking-cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 700;
+  animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-subline {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-tagline {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ===================================================================
+   HOME PAGE: ABOUT ME SECTION
+   =================================================================== */
+
+.section-spacing {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.about-card {
+  padding: 2.2rem 2.4rem;
+}
+
+.about-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.about-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.about-dash {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+/* ===================================================================
+   HOME PAGE: NETWORK / CONNECT SECTION
+   =================================================================== */
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.8rem;
+}
+
+@media (max-width: 992px) {
+  .network-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .network-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.network-card {
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.network-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.network-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.network-handle {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.network-arrow {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.network-card:hover .network-arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+/* ===================================================================
+   PROJECTS PAGE: HEADER & CATEGORIES
+   =================================================================== */
+
+.projects-header {
+  padding-top: 5.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.projects-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin-top: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.projects-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 640px;
+}
+
+/* Category section header with thin line filling the rest */
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.category-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  white-space: nowrap;
+}
+
+.category-number {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.category-name {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.category-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--card-border);
+}
+
+/* 3-column project card grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual Project Card */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  height: 100%;
+}
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.project-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(200, 149, 90, 0.08);
+  border: 1px solid rgba(200, 149, 90, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.project-card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.project-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.75rem;
+}
+
+.project-card-footer {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.02);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.project-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-subtle);
+  transform: translateY(-2px);
+}
+
+.project-btn-live {
+  background: var(--accent-subtle);
+  border-color: rgba(200, 149, 90, 0.3);
+  color: var(--accent);
+}
+
+.project-btn-live:hover {
+  background: var(--accent);
+  color: #0f0e0d;
+}
+
+/* ===================================================================
+   FOOTER (Universal)
+   - Thin top border
+   - Small muted text: "© 2026 Ajit Ramachandra Loni · MaciF"
+   - GitHub, LinkedIn, Instagram links
+   =================================================================== */
+
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--card-border);
+  padding: 2.5rem 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
