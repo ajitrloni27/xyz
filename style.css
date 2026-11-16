@@ -1,34 +1,69 @@
 /* ===================================================================
-   AJIT RAMACHANDRA LONI - PERSONAL PORTFOLIO
-   Theme: Minimal Dark with Warm Earth/Gold Accent (#c8955a)
-   Fonts: Syne (Headings), Space Grotesk (Body), Space Mono (Labels/Code)
+   AJIT RAMACHANDRA LONI - MASTER DARK LUXURY THEME
+   Unified Palette:
+     - Primary Background:   #32292F (Wine Ash - Dominant Canvas)
+     - Secondary Background: #292329 (Slightly deeper Wine Ash)
+     - Surface Background:   #3B3038 (Cards, Panels & Elevated Surfaces)
+     - Sage Green:           #879B83 (Primary Accent, Highlights & Badges)
+     - Amber Glow:           #D9A441 (Buttons, Glow Accents & Active States)
+     - Primary Text:         #F4F0E6 (Warm Cream - High Contrast Headings)
+     - Secondary Text:       #C5BEBB (Body Typography, Details & Muted Text)
+     - Borders:              #51454C (Card Borders & Dividers)
    =================================================================== */
 
 :root {
-  --bg-color: #0f0e0d;
-  --card-bg: #181716;
-  --card-border: #2a2826;
-  --card-radius: 14px;
-  
-  /* Text Colors - High Visibility & High Contrast */
-  --text-heading: #ffffff;
-  --text-main: #e8e2d9;
-  --text-muted: #b8b1a7;
-  
-  /* Accent Colors */
-  --accent: #c8955a;
-  --accent-glow: rgba(200, 149, 90, 0.28);
-  --accent-subtle: rgba(200, 149, 90, 0.08);
+  /* Exact Color Specification with Refined Light-Black Canvas */
+  --bg-primary: #0f0e0d;
+  --bg-secondary: #161413;
+  --bg-surface: #1a1816;
+  --bg-surface-elevated: #24201d;
+  --wine-ash: #32292F;
+  --sage-green: #879B83;
+  --amber-glow: #D9A441;
+  --text-primary: #F4F0E6;
+  --text-secondary: #C5BEBB;
+  --text-muted: #9c9298;
+  --border-color: #2e2a28;
+  --border-subtle: rgba(81, 69, 76, 0.45);
+  --border-hover: #D9A441;
 
+  /* RGB Helpers */
+  --wine-ash-rgb: 50, 41, 47;
+  --sage-rgb: 135, 155, 131;
+  --amber-rgb: 217, 164, 65;
+
+  /* Aliases for backwards compatibility */
+  --wine-ash: var(--bg-primary);
+  --wine-ash-surface: var(--bg-surface);
+  --wine-ash-deep: var(--bg-secondary);
+  --warm-cream: var(--text-primary);
+  --soft-beige: var(--text-secondary);
+  --text-heading: var(--text-primary);
+  --text-main: var(--text-secondary);
+  --card-bg: var(--bg-surface);
+  --card-border: var(--border-color);
+  --card-border-hover: var(--amber-glow);
+  --card-radius: 14px;
+
+  /* Ambient Lighting & Shadows */
+  --amber-glow-shadow: rgba(217, 164, 65, 0.22);
+  --sage-glow-shadow: rgba(135, 155, 131, 0.18);
+  --card-shadow: rgba(25, 20, 24, 0.55);
+
+  /* Fonts */
   --font-heading: 'Syne', sans-serif;
   --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Space Mono', monospace;
 
   --max-width: 1200px;
-  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Base reset */
+/* ===================================================================
+   BASE RESET & CONSISTENT DARK BODY
+   =================================================================== */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -38,8 +73,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 18px;
-  background-color: var(--bg-color);
-  color: var(--text-main);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.7;
 }
 
@@ -47,8 +82,8 @@ body {
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.7;
-  background-color: var(--bg-color);
-  color: var(--text-main);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
@@ -59,15 +94,15 @@ body {
 
 /* Headings universal visibility */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-heading);
+  color: var(--text-primary);
   font-family: var(--font-heading);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(200, 149, 90, 0.4);
+  background: rgba(217, 164, 65, 0.35);
   color: #ffffff;
 }
 
@@ -96,11 +131,7 @@ a {
 }
 
 /* ===================================================================
-   BACKGROUND ANIMATION LAYER (Both Pages)
-   - Fixed full-screen <canvas> behind content (~70 drifting particles)
-   - Two large blurred gradient orbs floating slowly
-   - Thin rotating circle outlines
-   - Pauses on hidden tab & respects prefers-reduced-motion
+   BACKGROUND ANIMATION LAYER (Consistent Wine Ash Dark Canvas)
    =================================================================== */
 
 .bg-layer {
@@ -109,7 +140,24 @@ a {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-  background-color: var(--bg-color);
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse 90% 65% at 50% -5%, rgba(50, 41, 47, 0.45) 0%, rgba(22, 19, 18, 0.8) 55%, #0f0e0d 100%),
+    radial-gradient(circle at 12% 18%, rgba(135, 155, 131, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 88% 38%, rgba(91, 64, 51, 0.14) 0%, transparent 48%),
+    radial-gradient(circle at 82% 84%, rgba(217, 164, 65, 0.10) 0%, transparent 52%),
+    linear-gradient(180deg, #0f0e0d 0%, #0d0c0b 100%);
+}
+
+/* Subtle Film Grain Noise Texture (Luxury Editorial Finish) */
+.bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.7;
+  z-index: 3;
 }
 
 /* Interactive Canvas Element */
@@ -122,59 +170,49 @@ a {
   display: block;
 }
 
-/* Two large floating blurred gradient orbs */
+/* Floating blurred gradient orbs */
 .bg-glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(80px);
   pointer-events: none;
   z-index: 1;
 }
 
+/* Orb 1: Sage Green subtle glow */
 .bg-glow-orb-1 {
-  top: 10%;
-  left: 15%;
-  width: 650px;
-  height: 650px;
+  top: 8%;
+  left: 10%;
+  width: 680px;
+  height: 680px;
   max-width: 65vw;
   max-height: 65vw;
-  background: radial-gradient(circle, rgba(200, 149, 90, 0.18) 0%, rgba(200, 149, 90, 0.05) 50%, transparent 75%);
-  animation: driftOrb1 35s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(135, 155, 131, 0.16) 0%, rgba(135, 155, 131, 0.04) 50%, transparent 75%);
+  animation: driftOrb1 38s ease-in-out infinite alternate;
 }
 
+/* Orb 2: Amber Glow & Wine Ash depth */
 .bg-glow-orb-2 {
-  bottom: 12%;
-  right: 10%;
-  width: 700px;
-  height: 700px;
+  bottom: 8%;
+  right: 6%;
+  width: 720px;
+  height: 720px;
   max-width: 70vw;
   max-height: 70vw;
-  background: radial-gradient(circle, rgba(200, 149, 90, 0.14) 0%, rgba(200, 149, 90, 0.03) 50%, transparent 75%);
-  animation: driftOrb2 45s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.13) 0%, rgba(91, 64, 51, 0.18) 45%, transparent 75%);
+  animation: driftOrb2 46s ease-in-out infinite alternate;
 }
 
 @keyframes driftOrb1 {
-  0% {
-    transform: translate(-10%, -10%) scale(0.95);
-  }
-  50% {
-    transform: translate(15%, 15%) scale(1.1);
-  }
-  100% {
-    transform: translate(5%, -5%) scale(1);
-  }
+  0% { transform: translate(-8%, -8%) scale(0.96); }
+  50% { transform: translate(12%, 10%) scale(1.08); }
+  100% { transform: translate(4%, -4%) scale(1); }
 }
 
 @keyframes driftOrb2 {
-  0% {
-    transform: translate(10%, 10%) scale(1);
-  }
-  50% {
-    transform: translate(-15%, -12%) scale(1.15);
-  }
-  100% {
-    transform: translate(-5%, 8%) scale(0.95);
-  }
+  0% { transform: translate(6%, 6%) scale(1); }
+  50% { transform: translate(-12%, -8%) scale(1.10); }
+  100% { transform: translate(-4%, 4%) scale(0.96); }
 }
 
 /* Thin rotating circle outlines */
@@ -191,54 +229,46 @@ a {
 .bg-circle-1 {
   width: 520px;
   height: 520px;
-  border: 1px solid rgba(200, 149, 90, 0.08);
-  animation: rotateCircle 45s linear infinite;
+  border: 1px solid rgba(135, 155, 131, 0.09);
+  animation: rotateCircle 48s linear infinite;
 }
 
 .bg-circle-2 {
   width: 900px;
   height: 900px;
-  border: 1px dashed rgba(245, 240, 232, 0.07);
-  animation: rotateCircleReverse 65s linear infinite;
+  border: 1px dashed rgba(81, 69, 76, 0.35);
+  animation: rotateCircleReverse 68s linear infinite;
 }
 
 .bg-circle-3 {
-  width: 1300px;
-  height: 1300px;
-  border: 1px solid rgba(245, 240, 232, 0.05);
-  animation: rotateCircle 80s linear infinite;
+  width: 1320px;
+  height: 1320px;
+  border: 1px solid rgba(135, 155, 131, 0.05);
+  animation: rotateCircle 84s linear infinite;
 }
 
 @keyframes rotateCircle {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes rotateCircleReverse {
-  from {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
 }
 
-/* Soft accent glow following mouse on desktop */
+/* Soft Amber Glow following mouse on desktop */
 .mouse-glow {
   position: fixed;
   top: 0;
   left: 0;
-  width: 460px;
-  height: 460px;
+  width: 440px;
+  height: 440px;
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(200, 149, 90, 0.14) 0%, rgba(200, 149, 90, 0.03) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.12) 0%, rgba(135, 155, 131, 0.04) 40%, transparent 70%);
   filter: blur(40px);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -269,10 +299,9 @@ a {
 
 /* ===================================================================
    NAVBAR
-   - Sticky with slightly blurred dark background
-   - 1px bottom border
-   - Logo "Ajit.-" + mono label "MaciF" in accent color
-   - Sliding underline for nav links
+   - Sticky with slightly blurred light-black background
+   - Auto-hides (slides up) on scroll down, reappears on scroll up
+   - 1px bottom border & sliding underline
    =================================================================== */
 
 .navbar {
@@ -282,15 +311,21 @@ a {
   background: rgba(15, 14, 13, 0.90);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--card-border);
-  transition: var(--transition);
+  border-bottom: 1px solid var(--border-color);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+  will-change: transform;
+}
+
+/* Slides up out of view on scroll down */
+.navbar.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  height: 74px;
 }
 
 .brand {
@@ -299,24 +334,25 @@ a {
   gap: 0.65rem;
 }
 
+/* Refined compact brand name */
 .brand-name {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text-heading);
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
 }
 
 .brand-badge {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-subtle);
-  border: 1px solid rgba(200, 149, 90, 0.3);
-  padding: 0.2rem 0.6rem;
+  color: var(--sage-green);
+  background: rgba(135, 155, 131, 0.12);
+  border: 1px solid rgba(135, 155, 131, 0.35);
+  padding: 0.18rem 0.58rem;
   border-radius: 6px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
@@ -327,15 +363,15 @@ a {
   list-style: none;
 }
 
-/* Nav links with sliding underline */
+/* Nav links with Sage-to-Amber sliding underline */
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   position: relative;
-  padding: 0.45rem 0;
-  letter-spacing: 0.03em;
+  padding: 0.4rem 0;
+  letter-spacing: 0.02em;
   transition: color 0.25s ease;
 }
 
@@ -346,7 +382,7 @@ a {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--accent);
+  background: linear-gradient(90deg, var(--sage-green), var(--amber-glow));
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left;
@@ -354,7 +390,7 @@ a {
 }
 
 .nav-link:hover {
-  color: var(--text-heading);
+  color: var(--text-primary);
 }
 
 .nav-link:hover::after,
@@ -363,7 +399,7 @@ a {
 }
 
 .nav-link.active {
-  color: var(--text-heading);
+  color: var(--text-primary);
 }
 
 /* ===================================================================
@@ -372,8 +408,8 @@ a {
 
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(26px);
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -387,39 +423,51 @@ a {
 .delay-3 { transition-delay: 0.3s; }
 
 /* ===================================================================
-   CARDS (Universal Style)
-   - Background #181716
-   - 1px border #2a2826
+   CARDS (Universal Dark Luxury Style)
+   - Surface Background: #3B3038 with #51454C border
    - 14px radius
-   - Hover lift 6px with accent glow
+   - Hover lift 6px with Amber Glow shadow & border
    =================================================================== */
 
 .card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: var(--card-radius);
-  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.32s ease, box-shadow 0.32s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(135, 155, 131, 0.32), transparent);
+  pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px var(--accent-glow), 0 0 0 1px var(--accent);
+  border-color: var(--amber-glow);
+  box-shadow: 0 16px 36px var(--card-shadow), 0 0 20px var(--amber-glow-shadow), 0 0 0 1px var(--amber-glow);
 }
 
 /* ===================================================================
-   BUTTONS (Scale slightly on hover)
+   BUTTONS (Amber Glow & Sage Green Accents)
    =================================================================== */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 0.85rem 1.6rem;
+  padding: 0.8rem 1.55rem;
   border-radius: 10px;
   cursor: pointer;
   border: 1px solid transparent;
@@ -428,93 +476,111 @@ a {
   white-space: nowrap;
 }
 
-/* Filled off-white, dark text */
+/* Primary: Amber Glow, Wine Ash Text */
 .btn-primary {
-  background-color: #f5f0e8;
-  color: #0f0e0d;
-  border-color: #f5f0e8;
+  background-color: var(--amber-glow);
+  color: var(--bg-primary);
+  border-color: var(--amber-glow);
+  box-shadow: 0 4px 14px rgba(217, 164, 65, 0.25);
 }
 
 .btn-primary:hover {
-  background-color: #ffffff;
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 22px rgba(245, 240, 232, 0.2);
+  background-color: #e2af4d;
+  border-color: #e2af4d;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(217, 164, 65, 0.38);
 }
 
-/* Outlined */
+/* Outline: Warm Cream Text, Sage Border */
 .btn-outline {
   background-color: transparent;
-  color: var(--text-main);
-  border-color: var(--card-border);
+  color: var(--text-primary);
+  border-color: rgba(135, 155, 131, 0.45);
 }
 
 .btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background-color: var(--accent-subtle);
-  transform: translateY(-2px) scale(1.04);
+  border-color: var(--amber-glow);
+  color: var(--amber-glow);
+  background-color: rgba(217, 164, 65, 0.08);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 /* ===================================================================
    HOME PAGE: HERO SECTION
+   - Compact, elegant portfolio name typography
+   - Refined font-size, letter-spacing, and line balance
    =================================================================== */
 
 .hero-section {
-  padding-top: 6.5rem;
-  padding-bottom: 6rem;
+  padding-top: 6.2rem;
+  padding-bottom: 5.6rem;
+  position: relative;
 }
 
 .hero-avatar-row {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 2.2rem;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .avatar-circle {
-  width: 56px;
-  height: 56px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  background: #181716;
+  border: 2px solid var(--sage-green);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-secondary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 18px rgba(200, 149, 90, 0.25);
+  box-shadow: 0 0 16px rgba(135, 155, 131, 0.25);
+  flex-shrink: 0;
 }
 
 .avatar-initials {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--amber-glow);
   letter-spacing: -0.02em;
 }
 
+/* Distinct, readable portfolio name with proper word spacing */
 .avatar-name {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-primary);
   letter-spacing: 0.02em;
+  word-spacing: 0.28rem;
+  white-space: nowrap;
 }
 
-/* Hero heading at least clamp(3rem, 8vw, 6.5rem) */
+/* Hero heading: Refined, compact size, elegant single line on desktop */
 .hero-heading {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
-  color: var(--text-heading);
-  margin-bottom: 1.5rem;
+  font-size: clamp(2.2rem, 4.4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  color: var(--text-primary);
+  margin-bottom: 1.3rem;
+  max-width: 850px;
 }
 
-/* Blinking accent-colored underscore */
+@media (min-width: 600px) {
+  .hero-heading {
+    white-space: nowrap;
+  }
+}
+
+/* Blinking Amber-colored underscore */
 .blinking-cursor {
   display: inline-block;
-  color: var(--accent);
+  color: var(--amber-glow);
   font-weight: 700;
   animation: blinkCursor 1s step-end infinite;
 }
@@ -526,15 +592,15 @@ a {
 
 /* Tagline with cycling typing effect */
 .hero-tagline {
-  font-size: 1.22rem;
-  color: var(--text-main);
-  max-width: 760px;
-  line-height: 1.7;
-  margin-bottom: 2.6rem;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 740px;
+  line-height: 1.65;
+  margin-bottom: 2.4rem;
 }
 
 .typed-phrase {
-  color: var(--accent);
+  color: var(--amber-glow);
   font-weight: 600;
   font-family: var(--font-mono);
   white-space: nowrap;
@@ -542,7 +608,7 @@ a {
 
 .type-cursor {
   display: inline-block;
-  color: var(--accent);
+  color: var(--amber-glow);
   font-weight: 400;
   margin-left: 2px;
   animation: blinkCursor 0.8s step-end infinite;
@@ -551,31 +617,35 @@ a {
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
 }
 
 /* ===================================================================
    HOME PAGE: ABOUT ME SECTION
+   - Warm Cream text, clean typography, refined spacing
+   - Sage dashes on Wine Ash elevated surface
    =================================================================== */
 
 .section-spacing {
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+  padding-top: 5.2rem;
+  padding-bottom: 5.2rem;
 }
 
-/* Section headings at least 2.5rem */
+/* Section headings at refined 2.15rem */
 .section-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-heading);
-  margin-bottom: 1.6rem;
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  color: var(--text-primary);
+  margin-bottom: 1.4rem;
 }
 
 .about-card {
   padding: 2.4rem 2.6rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
 }
 
 .about-list {
@@ -588,14 +658,14 @@ a {
 .about-line {
   display: flex;
   align-items: flex-start;
-  gap: 1.1rem;
-  font-size: 1.15rem;
-  color: var(--text-main);
+  gap: 1.15rem;
+  font-size: 1.12rem;
+  color: var(--text-primary);
   line-height: 1.65;
 }
 
 .about-dash {
-  color: var(--accent);
+  color: var(--sage-green);
   font-weight: 700;
   font-family: var(--font-mono);
   user-select: none;
@@ -604,19 +674,23 @@ a {
 
 /* ===================================================================
    HOME PAGE: NETWORK / CONNECT SECTION
-   - Show ONLY names LinkedIn, Github, Instagram, Email with ↗ arrow
-   - URLs only in href
+   - Surface background (#3B3038) with #51454C border
+   - Amber Glow hover state & diagonal arrow movement
    =================================================================== */
 
 .mono-label {
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  color: var(--accent);
+  color: var(--sage-green);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   font-weight: 600;
+}
+
+#connect {
+  padding-bottom: 7.2rem;
 }
 
 .network-grid {
@@ -644,53 +718,58 @@ a {
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
-  color: var(--text-heading);
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
 }
 
 .network-name {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-heading);
+  color: var(--text-primary);
   letter-spacing: -0.01em;
 }
 
 .network-arrow {
   font-family: var(--font-mono);
   font-size: 1.35rem;
-  color: var(--text-muted);
+  color: var(--sage-green);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.28s ease;
   display: inline-block;
 }
 
-/* Card hover moves arrow diagonally */
+/* Card hover moves arrow diagonally with Amber Glow */
 .card:hover .network-arrow {
-  color: var(--accent);
+  color: var(--amber-glow);
   transform: translate(5px, -5px);
 }
 
 /* ===================================================================
    PROJECTS PAGE: HEADER & CATEGORIES
+   - Unified Wine Ash Surface project cards
+   - Sage Green headers, borders, and icon containers
    =================================================================== */
 
 .projects-header {
-  padding-top: 6rem;
-  padding-bottom: 3.8rem;
+  padding-top: 5.8rem;
+  padding-bottom: 3.6rem;
 }
 
+/* Refined compact projects title */
 .projects-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  color: var(--text-heading);
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  color: var(--text-primary);
   margin-top: 0.4rem;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.8rem;
 }
 
 .projects-subtitle {
-  font-size: 1.18rem;
-  color: var(--text-muted);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
   max-width: 700px;
   line-height: 1.65;
 }
@@ -700,7 +779,7 @@ a {
   display: flex;
   align-items: center;
   gap: 1.4rem;
-  margin-top: 4rem;
+  margin-top: 3.8rem;
   margin-bottom: 2.2rem;
 }
 
@@ -713,30 +792,30 @@ a {
 
 .category-number {
   font-family: var(--font-mono);
-  font-size: 1rem;
-  color: var(--accent);
-  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--amber-glow);
+  font-weight: 700;
 }
 
 .category-name {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  color: var(--text-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 .category-line {
   flex-grow: 1;
   height: 1px;
-  background-color: var(--card-border);
+  background: linear-gradient(90deg, var(--border-color), transparent);
 }
 
 /* 3-column project card grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+  gap: 1.55rem;
   margin-bottom: 2.5rem;
 }
 
@@ -752,31 +831,74 @@ a {
   }
 }
 
-/* Individual Project Card */
+/* Tools & Technologies Grid */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.55rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tool-tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--sage-green);
+  background: rgba(135, 155, 131, 0.12);
+  border: 1px solid rgba(135, 155, 131, 0.3);
+  padding: 0.2rem 0.58rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Individual Project Card: Surface #3B3038 & Border #51454C */
 .project-card {
   display: flex;
   flex-direction: column;
   padding: 1.85rem;
   height: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
 }
 
 .project-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.35rem;
 }
 
 .project-icon-box {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: rgba(200, 149, 90, 0.1);
-  border: 1px solid rgba(200, 149, 90, 0.25);
+  background: rgba(135, 155, 131, 0.12);
+  border: 1px solid rgba(135, 155, 131, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
+  color: var(--sage-green);
+  transition: var(--transition);
+}
+
+.project-card:hover .project-icon-box {
+  color: var(--amber-glow);
+  border-color: var(--amber-glow);
+  background: rgba(217, 164, 65, 0.12);
+  transform: scale(1.05);
 }
 
 .project-card-body {
@@ -787,24 +909,24 @@ a {
 
 .project-title {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.22rem;
   font-weight: 700;
   line-height: 1.3;
-  color: var(--text-heading);
+  color: var(--text-primary);
   margin-bottom: 0.85rem;
 }
 
 .project-desc {
-  font-size: 0.98rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  line-height: 1.62;
   margin-bottom: 1.85rem;
 }
 
 .project-card-footer {
   margin-top: auto;
   padding-top: 1.35rem;
-  border-top: 1px solid var(--card-border);
+  border-top: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -814,48 +936,203 @@ a {
 .project-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 700;
   padding: 0.55rem 0.95rem;
   border-radius: 8px;
-  border: 1px solid var(--card-border);
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.03);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  border: 1px solid rgba(135, 155, 131, 0.35);
+  color: var(--text-primary);
+  background: rgba(50, 41, 47, 0.4);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   text-decoration: none;
 }
 
 .project-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-subtle);
-  transform: translateY(-2px) scale(1.04);
+  border-color: var(--amber-glow);
+  color: var(--amber-glow);
+  background: rgba(217, 164, 65, 0.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .project-btn-live {
-  background: var(--accent-subtle);
-  border-color: rgba(200, 149, 90, 0.35);
-  color: var(--accent);
+  background: rgba(217, 164, 65, 0.12);
+  border-color: var(--amber-glow);
+  color: var(--amber-glow);
 }
 
 .project-btn-live:hover {
-  background: var(--accent);
-  color: #0f0e0d;
+  background: var(--amber-glow);
+  color: var(--bg-primary);
+  box-shadow: 0 4px 16px rgba(217, 164, 65, 0.35);
 }
 
 /* ===================================================================
-   FOOTER (Universal)
-   - Thin top border
-   - Small muted text: "© 2026 Ajit Ramachandra Loni · MaciF"
-   - GitHub, LinkedIn, Instagram links
+   ADDITIONAL SYSTEM SECTIONS & COMPONENTS (Skills, Tech, Experience, Education, Form)
+   Complete styling for design system harmony across any future components
+   =================================================================== */
+
+/* Skills & Technologies */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  padding: 1.8rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+}
+
+.skill-category-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.skill-badge {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(135, 155, 131, 0.12);
+  border: 1px solid rgba(135, 155, 131, 0.3);
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.skill-badge:hover {
+  border-color: var(--amber-glow);
+  color: var(--amber-glow);
+  background: rgba(217, 164, 65, 0.1);
+}
+
+/* Experience & Education Timelines */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 2px solid var(--border-color);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--amber-glow);
+  border: 2px solid var(--bg-primary);
+}
+
+.timeline-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.timeline-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--sage-green);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+}
+
+/* Contact Form Components */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  max-width: 650px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--sage-green);
+  font-weight: 600;
+}
+
+.form-input,
+.form-textarea {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--amber-glow);
+  box-shadow: 0 0 12px var(--amber-glow-shadow);
+}
+
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* ===================================================================
+   FOOTER (Consistent Dark Wine Ash #32292F to #292329)
    =================================================================== */
 
 .site-footer {
   margin-top: auto;
-  border-top: 1px solid var(--card-border);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
   padding: 2.8rem 0;
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(217, 164, 65, 0.25), transparent);
 }
 
 .footer-inner {
@@ -868,26 +1145,27 @@ a {
 
 .footer-copyright {
   font-size: 0.92rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-family: var(--font-mono);
 }
 
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.8rem;
   list-style: none;
 }
 
 .footer-link {
   font-family: var(--font-mono);
   font-size: 0.92rem;
-  color: var(--text-muted);
-  transition: color 0.25s ease;
+  color: var(--sage-green);
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .footer-link:hover {
-  color: var(--accent);
+  color: var(--amber-glow);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 640px) {

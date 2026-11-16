@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMouseGlow(isReducedMotion);
   initTypingEffect(isReducedMotion);
   initScrollReveal(isReducedMotion);
+  initNavbarScroll();
 });
 
 /* ===================================================================
@@ -51,6 +52,8 @@ function initParticleCanvas(isReducedMotion) {
       this.vy = (Math.random() - 0.5) * 0.55;
       this.radius = Math.random() * 1.8 + 1.2;
       this.baseAlpha = Math.random() * 0.45 + 0.35;
+      this.isAmber = Math.random() < 0.28; // 28% warm amber highlights, rest serene sage green
+      this.colorRgb = this.isAmber ? '217, 164, 65' : '135, 155, 131';
     }
 
     update() {
@@ -83,7 +86,7 @@ function initParticleCanvas(isReducedMotion) {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200, 149, 90, ${this.baseAlpha})`;
+      ctx.fillStyle = `rgba(${this.colorRgb}, ${this.baseAlpha})`;
       ctx.fill();
     }
   }
@@ -134,7 +137,7 @@ function initParticleCanvas(isReducedMotion) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(200, 149, 90, ${alpha})`;
+          ctx.strokeStyle = `rgba(135, 155, 131, ${alpha})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
@@ -289,4 +292,35 @@ function initScrollReveal(isReducedMotion) {
   }, observerOptions);
 
   reveals.forEach(el => observer.observe(el));
+}
+
+/* ===================================================================
+   5. AUTO-HIDING NAVBAR ON SCROLL DOWN (Goes up on scroll down, returns on scroll up)
+   =================================================================== */
+function initNavbarScroll() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        // When scrolling down past 60px, navbar goes up (hides)
+        if (currentScrollY > 60 && currentScrollY > lastScrollY) {
+          navbar.classList.add('nav-hidden');
+        } else {
+          // When scrolling up or at the top, navbar comes back down
+          navbar.classList.remove('nav-hidden');
+        }
+
+        lastScrollY = Math.max(0, currentScrollY);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
