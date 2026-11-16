@@ -402,6 +402,37 @@ a {
   color: var(--text-primary);
 }
 
+/* Mobile Navigation Optimization (Touch-friendly, compact & single line) */
+@media (max-width: 640px) {
+  .nav-inner {
+    height: 60px;
+  }
+
+  .brand-name {
+    font-size: 1.15rem;
+  }
+
+  .nav-links {
+    gap: 1.15rem;
+  }
+
+  .nav-link {
+    font-size: 0.86rem;
+    padding: 0.35rem 0;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-links {
+    gap: 0.82rem;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+  }
+}
+
 /* ===================================================================
    FADE-UP SCROLL ANIMATIONS (IntersectionObserver)
    =================================================================== */
