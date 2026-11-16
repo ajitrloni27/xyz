@@ -1,6 +1,8 @@
 # Netlify configuration for pure HTML/CSS/JS site
 [build]
   publish = "."
+  # No build step needed; overrides the "npm run build" command set in the Netlify UI
+  command = "echo 'Static site - no build step required'"
 
 [[headers]]
   for = "/*"
