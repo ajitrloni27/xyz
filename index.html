@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ajit Ramachandra Loni · Founder, MaciF</title>
-  <meta name="description" content="Personal portfolio of Ajit Ramachandra Loni - 3rd year Information Science & Engineering student and Founder of MaciF building apps, hackathon projects, and solutions to real problems." />
+  <title>Ajit · Portfolio</title>
+  <meta name="description"
+    content="Personal portfolio of Ajit Ramachandra Loni - 3rd year Information Science & Engineering student building apps, hackathon projects, and solutions to real problems." />
   <meta name="theme-color" content="#0f0e0d" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
   <!-- Google Fonts: Syne, Space Grotesk, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&display=swap"
+    rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- BACKGROUND ANIMATION LAYER -->
-  <div class="bg-canvas" aria-hidden="true">
-    <div class="bg-glow-orb"></div>
+  <div class="bg-layer" aria-hidden="true">
+    <canvas id="bg-canvas" class="bg-canvas-elem"></canvas>
+    <div class="bg-glow-orb bg-glow-orb-1"></div>
+    <div class="bg-glow-orb bg-glow-orb-2"></div>
     <div class="bg-circle bg-circle-1"></div>
     <div class="bg-circle bg-circle-2"></div>
     <div class="bg-circle bg-circle-3"></div>
-    <div id="bg-stars" class="bg-stars"></div>
   </div>
+
+  <!-- Soft Accent Glow Follower (Desktop) -->
+  <div id="mouse-glow" class="mouse-glow" aria-hidden="true"></div>
 
   <!-- NAVBAR -->
   <header class="navbar">
@@ -47,7 +57,7 @@
     <!-- SECTION 1: HERO -->
     <section class="hero-section">
       <div class="container">
-        
+
         <!-- Avatar Row -->
         <div class="hero-avatar-row reveal">
           <div class="avatar-circle">
@@ -61,12 +71,9 @@
           Hey, I'm Ajit<span class="blinking-cursor">_</span>
         </h1>
 
-        <!-- Small mono line under heading -->
-        <p class="hero-subline reveal delay-1">Founder, MaciF</p>
-
-        <!-- Muted Tagline -->
+        <!-- Tagline with typing effect -->
         <p class="hero-tagline reveal delay-2">
-          3rd year ISE student building apps, hackathon projects, and things that solve real problems.
+          <span class="typed-phrase" id="typed-phrase">3rd year ISE student</span><span class="type-cursor" id="type-cursor">|</span> building apps, hackathon projects, and things that solve real problems.
         </p>
 
         <!-- Two Action Buttons -->
@@ -86,7 +93,7 @@
     <section class="section-spacing">
       <div class="container">
         <h2 class="section-title reveal">About Me</h2>
-        
+
         <div class="card about-card reveal delay-1">
           <ul class="about-list">
             <li class="about-line">
@@ -95,11 +102,11 @@
             </li>
             <li class="about-line">
               <span class="about-dash">—</span>
-              <span>Founder of MaciF.</span>
+              <span>I love turning real-world problems into working software.</span>
             </li>
             <li class="about-line">
               <span class="about-dash">—</span>
-              <span>I love turning real-world problems into working software.</span>
+              <span>I love to sleep.</span>
             </li>
           </ul>
         </div>
@@ -117,38 +124,29 @@
 
         <div class="network-grid">
           <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-1">
-            <div class="network-info">
-              <span class="network-name">LinkedIn</span>
-              <span class="network-handle">in/ajitrloni</span>
-            </div>
+          <a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer"
+            class="card network-card reveal delay-1" aria-label="LinkedIn">
+            <span class="network-name">LinkedIn</span>
             <span class="network-arrow" aria-hidden="true">↗</span>
           </a>
 
           <!-- GitHub -->
-          <a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-2">
-            <div class="network-info">
-              <span class="network-name">Github</span>
-              <span class="network-handle">@ajitrloni27</span>
-            </div>
+          <a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer"
+            class="card network-card reveal delay-2" aria-label="Github">
+            <span class="network-name">Github</span>
             <span class="network-arrow" aria-hidden="true">↗</span>
           </a>
 
           <!-- Instagram -->
-          <a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer" class="card network-card reveal delay-3">
-            <div class="network-info">
-              <span class="network-name">Instagram</span>
-              <span class="network-handle">@ajit__loni</span>
-            </div>
+          <a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer"
+            class="card network-card reveal delay-3" aria-label="Instagram">
+            <span class="network-name">Instagram</span>
             <span class="network-arrow" aria-hidden="true">↗</span>
           </a>
 
           <!-- Email -->
-          <a href="mailto:ajitrloni27@gmail.com" class="card network-card reveal delay-3">
-            <div class="network-info">
-              <span class="network-name">Email</span>
-              <span class="network-handle">ajitrloni27@gmail.com</span>
-            </div>
+          <a href="mailto:ajitrloni27@gmail.com" class="card network-card reveal delay-3" aria-label="Email">
+            <span class="network-name">Email</span>
             <span class="network-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -164,9 +162,12 @@
         &copy; 2026 Ajit Ramachandra Loni &middot; MaciF
       </p>
       <ul class="footer-links">
-        <li><a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
-        <li><a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a></li>
+        <li><a href="https://github.com/ajitrloni27" target="_blank" rel="noopener noreferrer"
+            class="footer-link">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ajitrloni/" target="_blank" rel="noopener noreferrer"
+            class="footer-link">LinkedIn</a></li>
+        <li><a href="https://instagram.com/ajit__loni" target="_blank" rel="noopener noreferrer"
+            class="footer-link">Instagram</a></li>
       </ul>
     </div>
   </footer>
@@ -174,4 +175,5 @@
   <!-- Scripts -->
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects · Ajit Ramachandra Loni</title>
-  <meta name="description" content="Explore selected projects spanning apps, hackathon builds, and college works by Ajit Ramachandra Loni, 3rd year ISE student & Founder of MaciF." />
+  <meta name="description" content="Explore selected projects spanning apps, hackathon builds, and college works by Ajit Ramachandra Loni, 3rd year Information Science & Engineering student." />
   <meta name="theme-color" content="#0f0e0d" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
   <!-- Google Fonts: Syne, Space Grotesk, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,13 +19,17 @@
 <body>
 
   <!-- BACKGROUND ANIMATION LAYER -->
-  <div class="bg-canvas" aria-hidden="true">
-    <div class="bg-glow-orb"></div>
+  <div class="bg-layer" aria-hidden="true">
+    <canvas id="bg-canvas" class="bg-canvas-elem"></canvas>
+    <div class="bg-glow-orb bg-glow-orb-1"></div>
+    <div class="bg-glow-orb bg-glow-orb-2"></div>
     <div class="bg-circle bg-circle-1"></div>
     <div class="bg-circle bg-circle-2"></div>
     <div class="bg-circle bg-circle-3"></div>
-    <div id="bg-stars" class="bg-stars"></div>
   </div>
+
+  <!-- Soft Accent Glow Follower (Desktop) -->
+  <div id="mouse-glow" class="mouse-glow" aria-hidden="true"></div>
 
   <!-- NAVBAR -->
   <header class="navbar">
