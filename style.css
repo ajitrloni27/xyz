@@ -862,73 +862,153 @@ a {
   }
 }
 
-/* Tools & Technologies Grid (Compact, balanced layout) */
+/* Tools & Technologies Grid (Wrapping desktop grid, 2 to 3 per row on mobile) */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.15rem;
-  margin-bottom: 2.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 2.5rem;
 }
 
-@media (max-width: 600px) {
+/* Individual Tool Box: Logo on left, Name on right, vertically centered */
+.tool-card {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem !important;
+  min-height: 56px;
+  height: auto !important;
+  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  cursor: default;
+}
+
+/* Hover: Lifts slightly (-4px), border & glow changes to Amber Glow accent, logo scales */
+.tool-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--amber-glow) !important;
+  box-shadow: 0 10px 24px var(--card-shadow), 0 0 16px var(--amber-glow-shadow), 0 0 0 1px var(--amber-glow) !important;
+}
+
+/* Tool Logo / Icon Box (Left side, fixed square, centered) */
+.tool-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tool-card:hover .tool-icon-box,
+.tool-card:hover .tool-logo,
+.tool-card:hover .tool-fallback-icon {
+  transform: scale(1.15);
+}
+
+/* Official Logo image */
+.tool-logo {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Fallback SVG and conceptual SVG icons (matching size & style) */
+.tool-fallback-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  color: var(--sage-green);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tool-card:hover .tool-fallback-icon {
+  color: var(--amber-glow);
+}
+
+/* Tool Name (Right side, vertically centered) */
+.tool-card .project-title,
+.tool-card .tool-name {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 !important;
+  line-height: 1.25;
+  transition: color 0.3s ease;
+  word-break: break-word;
+}
+
+.tool-card:hover .project-title,
+.tool-card:hover .tool-name {
+  color: var(--warm-cream);
+}
+
+/* Responsive: 2 to 3 per row on mobile, with no overflow or broken layout */
+@media (max-width: 768px) {
   .tools-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .tool-card {
+    padding: 0.72rem 0.9rem !important;
+    gap: 0.65rem;
+    min-height: 50px;
+  }
+  .tool-icon-box {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+  .tool-logo,
+  .tool-fallback-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+  }
+  .tool-card .project-title,
+  .tool-card .tool-name {
+    font-size: 0.88rem;
   }
 }
 
-.tool-tag {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--sage-green);
-  background: rgba(135, 155, 131, 0.12);
-  border: 1px solid rgba(135, 155, 131, 0.3);
-  padding: 0.16rem 0.48rem;
-  border-radius: 6px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+@media (max-width: 480px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+  .tool-card {
+    padding: 0.65rem 0.75rem !important;
+    gap: 0.55rem;
+    min-height: 46px;
+  }
+  .tool-card .project-title,
+  .tool-card .tool-name {
+    font-size: 0.82rem;
+  }
 }
 
-/* Compact Tool Cards in Tools Section */
-.tool-card {
-  padding: 1.15rem 1.25rem;
-  border-radius: 12px;
-}
-
-.tool-card .project-card-top {
-  margin-bottom: 0.85rem;
-}
-
-.tool-card .project-icon-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-}
-
-.tool-card .project-icon-box svg {
-  width: 18px;
-  height: 18px;
-}
-
-.tool-card .project-title {
-  font-size: 1.05rem;
-  margin-bottom: 0.4rem;
-}
-
-.tool-card .project-desc {
-  font-size: 0.84rem;
-  line-height: 1.52;
-  margin-bottom: 0.8rem;
-}
-
-.tool-card .project-card-footer {
-  margin-top: auto;
-  padding-top: 0.75rem;
-}
-
-.tool-card .project-btn {
-  font-size: 0.75rem;
-  padding: 0.38rem 0.75rem;
+@media (min-width: 481px) and (max-width: 680px) {
+  .tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+  }
 }
 
 /* Individual Project Card: Surface #3B3038 & Border #51454C */
